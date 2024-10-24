@@ -1,0 +1,15 @@
+/* src/components/Comment/CommentItem.module.css */
+.comment-item {
+    margin-bottom: 15px;
+  }
+  
+  .comment-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .comment-item .comment-body {
+    margin-top: 5px;
+  }
+  
