@@ -1,5 +1,6 @@
 // src/components/Comment/CommentList.tsx
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 import CommentItem from './CommentItem';
 
 interface CommentListProps {
@@ -7,14 +8,16 @@ interface CommentListProps {
 }
 
 const CommentList: React.FC<CommentListProps> = ({ comments }) => (
-  <div className="comment-list">
-    <h2>Comments</h2>
+  <Box mt={4}>
+    <Typography variant="h5" mb={2}>
+      Comments
+    </Typography>
     {comments.map((comment) =>
       comment.kind !== 'more' ? (
         <CommentItem key={comment.data.id} comment={comment.data} />
       ) : null
     )}
-  </div>
+  </Box>
 );
 
 export default CommentList;

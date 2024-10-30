@@ -1,10 +1,16 @@
+// src/components/Spinner/Spinner.tsx
 import React from 'react';
-import styles from './Spinner.module.css';
+import { CircularProgress, Box } from '@mui/material';
 
 const Spinner: React.FC = () => (
-  <div className={styles.spinner}>
-    <div className={styles.loader}></div>
-  </div>
+  <Box
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    height="100vh"
+  >
+    <CircularProgress color="primary" />
+  </Box>
 );
 
 export default Spinner;
