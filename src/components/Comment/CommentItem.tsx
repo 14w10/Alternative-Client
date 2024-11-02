@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper } from '@mui/material';
-import { marked } from 'marked';
+import he from 'he';
 
 interface CommentItemProps {
   comment: any;
 }
 
 const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
-  const [htmlContent, setHtmlContent] = useState<string>('');
-
-  useEffect(() => {
-    // Convert Markdown to HTML asynchronously
-    const convertMarkdown = async () => {
-      const convertedHtml = await marked(comment.body);
-      setHtmlContent(convertedHtml);
-    };
-
-    convertMarkdown();
-  }, [comment.body]);
 
   return (
     <Box ml={2} mt={2}>
@@ -29,7 +17,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
         <Box
           component="div" // Specify the component as 'div'
           mt={1}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          dangerouslySetInnerHTML={{ __html: he.decode(comment.body_html) }}
         />
         {/* Render replies recursively */}
         {comment.replies &&
