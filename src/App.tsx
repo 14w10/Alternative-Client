@@ -6,7 +6,8 @@ import PostPage from './pages/PostPage';
 const App = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />}/>
+      <Route path="/:sub" element={<HomePage />} />
       <Route path="/post/:id" element={<PostPage />} />
     </Routes>
   </Router>
