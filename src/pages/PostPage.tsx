@@ -5,6 +5,7 @@ import PostDetails from '../components/Post/PostDetails';
 import CommentList from '../components/Comment/CommentList';
 import { fetchPostDetails } from '../services/api';
 import Spinner from '../components/Layout/Spinner';
+import SearchAppBar from '../components/SearchBar/SearchAppBar';
 
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,6 +41,7 @@ const PostPage: React.FC = () => {
 
   return (
     <div>
+      <SearchAppBar />
       <PostDetails post={post} />
       <CommentList comments={comments} />
     </div>
