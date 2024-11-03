@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Alternative Client for Reddit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web app designed to fetch all posts and comments from a Reddit page and display them using the **MUI** theme and **React** framework.
 
-## Available Scripts
+## Design Decisions
 
-In the project directory, you can run:
+This project is built using **TypeScript** and **React** to leverage type safety and server-side rendering, ensuring a scalable and efficient development experience.
 
-### `npm start`
+### Key Design Elements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Router**: Utilizes **`react-router-dom`** for configuring routes, navigation, and page reloading.
+- **Material UI Component**: Uses the **`MUI`** package as the primary UI library to display posts and comments.
+- **Component-based Structure**: Each feature is implemented as an independent component (`Post`, `Comment`, `Layout`).
+- **Error Handling, Searching, and Loading**: Includes an error handler, a search bar for navigation, and a spinner to indicate loading states.
+- **API Service Layer**: A service layer (`api.ts`) fetches posts and comments from Reddit using the **`Axios`** package.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Key Packages
 
-### `npm test`
+- **`react`**: Core library for building the React app.
+- **`typescript`**: Adds static typing to JavaScript, enhancing code quality.
+- **`axios`**: For making HTTP requests to fetch data from Reddit.
+- **`@mui/icons-material`**: Provides Material UI icons for UI enhancement.
+- **`@mui/material`**: Main Material UI package for components and theming.
+- **`react-router-dom`**: For handling routing in the application.
+- **`he`**: Used to decode HTML entities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Challenges and Solutions
 
-### `npm run build`
+### UI Design
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Initially, the website used basic CSS for styling, resulting in an unattractive design. After researching, I found the **Material UI** library, which greatly improved the UI design.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Search Bar
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+At first, the app could only fetch data from the default subreddit (`all`). To provide users with more flexibility, I implemented a **search bar** that allows easy navigation to any subreddit by simply entering the subreddit name.
 
-### `npm run eject`
+### Title Display
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Posts and comments initially displayed encoded characters like `&amp` in their titles because the data fetched from Reddit's JSON was in **HTML format**. To solve this, I used the **`he`** package to decode the HTML content properly.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Markdown Display in Comments
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Markdown comments were initially displayed incorrectly, showing raw HTML elements like `<div class='md'>`. I first tried using the **`marked`** package to solve this issue, but it did not handle certain elements like titles (`#`), subtitles (`##`, `###`), and unordered lists (`-`) properly. I realized that the comments were also in **HTML format** and needed decoding, similar to the titles. I resolved this issue by using the **`he`** package to decode the comments as well.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Picture Display in Posts and Comments
 
-## Learn More
+Most Reddit posts include images, but initially, they were not being fetched or displayed. Upon reviewing the JSON data, I found that image sources were located in `post.preview.images`. However, when using the **`CardMedia`** component from **`MUI`** to display these images, they appeared broken or contained alt text. The root cause was that the source URL was also encoded in **HTML format**, which required decoding. Again, I used the **`he`** package to decode the URLs, and the images were then displayed correctly.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Error Handler
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Initially, error handling involved a button that redirected users back to the home page when an invalid subreddit was entered. However, this button did not reliably reload the page. To address this, I replaced the button with a **timer** that automatically redirects users back to the home page after 3 seconds, ensuring a smoother experience without manual interaction.

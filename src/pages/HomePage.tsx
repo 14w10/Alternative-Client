@@ -3,8 +3,8 @@ import { fetchPosts } from '../services/api';
 import PostList from '../components/Post/PostList';
 import Spinner from '../components/Layout/Spinner';
 import { useParams } from 'react-router-dom';
-import SearchAppBar from '../components/SearchBar/SearchAppBar';
-import ErrorHandler from '../components/ErrorHandler/ErrorHandler';
+import SearchAppBar from '../components/Layout/SearchAppBar';
+import ErrorHandler from '../components/Layout/ErrorHandler';
 
 const HomePage: React.FC = () => {
   const [posts, setPosts] = useState([]);

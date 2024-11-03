@@ -1,11 +1,10 @@
-// src/pages/PostPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PostDetails from '../components/Post/PostDetails';
 import CommentList from '../components/Comment/CommentList';
 import { fetchPostDetails } from '../services/api';
 import Spinner from '../components/Layout/Spinner';
-import SearchAppBar from '../components/SearchBar/SearchAppBar';
+import SearchAppBar from '../components/Layout/SearchAppBar';
 
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

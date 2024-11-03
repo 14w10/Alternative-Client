@@ -1,4 +1,3 @@
-// src/components/Post/PostItem.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button, Box } from '@mui/material';
